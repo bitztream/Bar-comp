@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/app.js",
+    "seed": "node server/seeder.js",
     "watchbuild": "webpack --watch",
     "build": "webpack",
     "test": "jest"
