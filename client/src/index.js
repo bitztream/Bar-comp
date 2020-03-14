@@ -4,4 +4,4 @@ import App from './components/App.jsx';
 
 
 
-ReactDOM.render(<App streamer={'AlphaRobot'}/>, document.getElementById('root'));
+ReactDOM.render(<App streamer={'BrutalNinja'}/>, document.getElementById('root'));
