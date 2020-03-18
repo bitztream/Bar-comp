@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const BackImg = styled.img`
   width: 100%;
-  height: auto;
+  max-height: 400px;
   padding: 0:
 `;
 
