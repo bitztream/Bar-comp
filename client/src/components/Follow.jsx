@@ -55,10 +55,11 @@ class Follow extends React.Component {
   }
 
   render() {
-    // const heart = { this.state.swapHeart };
+    let { swapHeart } = this.state;
+    console.log(swapHeart);
     return (
       <Container onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {!this.state.swapHeart ? <SmallHeart /> : <BigHeart />}
+        {swapHeart ? <BigHeart /> : <SmallHeart />}
         <Word>
           Follow
         </Word>
