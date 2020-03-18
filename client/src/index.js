@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import MainBar from './components/MainBar';
 
 
 
-ReactDOM.render(<App streamer={'BrutalNinja'}/>, document.getElementById('root'));
+ReactDOM.render(<MainBar />, document.getElementById('root'));
