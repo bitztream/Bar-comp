@@ -52,7 +52,7 @@ const data = {
     'hippopotamus' ],
  name: 'MyWhiteEltonXX',
  avatarPicUrl: 'https://loremflickr.com/80/80',
- backgroundPicUrl: 'https://bitztreambar.s3-us-west-1.amazonaws.com/HeartOutline.png',
+ backgroundPicUrl: 'https://loremflickr.com/600/400',
  customEmotesCount: 44 };
 
  export default data;

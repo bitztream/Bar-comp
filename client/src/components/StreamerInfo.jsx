@@ -5,13 +5,14 @@ import DivRow from './DivRow';
 const AvatarImg = styled.img`
   border-radius: 50%;
   padding: 2px 8px;
-  width: 40px;
-  max-height: 40px;
+  width: 34px;
+  max-height: 34px;
 `;
 
 const Name = styled.h5`
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 `;
 
 const Div = styled.div`
