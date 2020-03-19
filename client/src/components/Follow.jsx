@@ -8,38 +8,38 @@ const Wrapper = styled.div`
   justify-items: space-between;
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-radius: 5px;
-  height: 30px;
-  justify-content: space-around;
-  color: white;
-  width: 80px;
-  background-color: #8643eb;
-  
-  &:hover {
-    background-color: #772ce8;
-  }
-`;
-
 // const Container = styled.div`
 //   display: flex;
 //   flex-direction: row;
 //   align-items: center;
 //   border-radius: 5px;
 //   height: 30px;
-//   justify-content: ${(props) => (props.small ? 'center' : 'space-around')};
+//   justify-content: space-around;
 //   color: white;
-//   width: ${(props) => (props.small ? '35px' : '80px')};
-//   margin-right: ${(props) => (props.small ? '5px' : '0px')};
-//   background-color: ${(props) => (props.small ? '#dcdce0' : '#8643eb')};
+//   width: 80px;
+//   background-color: #8643eb;
   
 //   &:hover {
-//     background-color: ${(props) => (props.small ? '#cc0404' : '#772ce8')};
+//     background-color: #772ce8;
 //   }
 // `;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 5px;
+  height: 30px;
+  justify-content: ${(props) => (props.small ? 'center' : 'space-around')};
+  color: white;
+  width: ${(props) => (props.small ? '35px' : '80px')};
+  margin-right: ${(props) => (props.small ? '5px' : '0px')};
+  background-color: ${(props) => (props.small ? '#dcdce0' : '#8643eb')};
+  
+  &:hover {
+    background-color: ${(props) => (props.small ? '#cc0404' : '#772ce8')};
+  }
+`;
 
 const ContainerS = styled.div`
   display: flex;
@@ -142,8 +142,8 @@ class Follow extends React.Component {
           onMouseLeave={this.mouseLeave}
           onClick={this.handleClick}
         >
-          {growHeart ? <Heart style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
-            : <Heart style={{ transition: '400ms', transform: 'scale(1)', content: smallUrl }} />}
+          {growHeart ? <Heart data-box="white" style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
+            : <Heart data-box="white" style={{ transition: '400ms', transform: 'scale(1)', content: smallUrl }} />}
           <Word>
             Follow
           </Word>
