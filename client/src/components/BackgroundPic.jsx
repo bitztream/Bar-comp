@@ -8,16 +8,12 @@ const BackImg = styled.img`
   padding: 0:
 `;
 
-const Div = styled.div`
-  padding-bottom: 0;
-`;
+// const Div = styled.div`
+//   padding-bottom: 0;
+// `;
 
 function BackgroundPic({ pickUrl }) {
-  return (
-    <Div>
-      <BackImg src={pickUrl} alt="my background" />
-    </Div>
-  );
+  return <BackImg src={pickUrl} alt="my background" />;
 }
 
 export default BackgroundPic;

@@ -9,7 +9,7 @@ const Container = styled.div`
   height: 30px;
   justify-items: space around;
   color: white;
-  width: 76px;
+  width: 80px;
   background-color: #8643eb;
 
   &:hover {
@@ -17,24 +17,19 @@ const Container = styled.div`
   }
 `;
 
+
 const SmallHeart = styled.img`
-  padding: 3px 10px;
-  width: 14px;
+  padding: 3px 8px 3px 10px;
+  width: 16px;
   height: auto;
   content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png");
 `;
 
-const BigHeart = styled.img`
-  padding: 3px 8px 3px 7px;
-  width: 19px;
-  height: auto;
-  content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png");
-`;
 
 const Word = styled.h5`
-  padding: 4px 6px 4px 0;
+  padding: 4px 10px 4px 0;
   font-family: "Open Sans";
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 `;
 
@@ -55,11 +50,14 @@ class Follow extends React.Component {
   }
 
   render() {
-    let { swapHeart } = this.state;
-    console.log(swapHeart);
+    const { swapHeart } = this.state;
+    const bigUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")';
+    const smallUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png")';
+
     return (
       <Container onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {swapHeart ? <BigHeart /> : <SmallHeart />}
+        {swapHeart ? <SmallHeart style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
+          : <SmallHeart style={{ transition: '300ms', transform: 'scale(1)', content: smallUrl }} />}
         <Word>
           Follow
         </Word>

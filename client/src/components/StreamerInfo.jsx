@@ -5,14 +5,15 @@ import DivRow from './DivRow';
 const AvatarImg = styled.img`
   border-radius: 50%;
   padding: 2px 8px;
-  width: 34px;
-  max-height: 34px;
+  width: 40px;
+  max-height: 40px;
 `;
 
 const Name = styled.h5`
   margin: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  font-size: 14px;
 `;
 
 const Div = styled.div`
@@ -23,15 +24,16 @@ const Div = styled.div`
   padding-left: 2px;
 `;
 
-function StreamerInfo({ avatar, click }) {
+// eslint-disable-next-line react/prop-types
+function StreamerInfo({ avatar, name }) {
   return (
-    <DivRow onClick={click}>
+    <DivRow>
       <Div>
         <AvatarImg src={avatar} alt="My Avatar" />
       </Div>
       <Div>
         <Name>
-          Madoblasto
+          { name }
         </Name>
       </Div>
     </DivRow>
