@@ -9,34 +9,56 @@ const Container = styled.div`
   height: 30px;
   justify-items: space around;
   color: white;
-  width: 76px;
+  width: 80px;
   background-color: #8643eb;
+
+  #big {
+    transform: scale(1);
+    transition: transform 300ms ease-out;
+  }
 
   &:hover {
     background-color: #772ce8;
+    #big {
+      transform: scale(1.2);
+      transition: transform 300ms ease-out;
+    }
   }
 `;
 
+
 const SmallHeart = styled.img`
-  padding: 3px 10px;
+  padding: 3px 8px 3px 10px;
   width: 14px;
   height: auto;
   content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png");
 `;
 
 const BigHeart = styled.img`
-  padding: 3px 8px 3px 7px;
-  width: 19px;
+  padding: 3px 8px 3px 10px;
+  width: 14px;
   height: auto;
   content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png");
 `;
 
+
 const Word = styled.h5`
-  padding: 4px 6px 4px 0;
+  padding: 4px 8px 4px 0;
   font-family: "Open Sans";
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
 `;
+
+// const transform = {
+//   ':hover': {
+//     transform: 'scale(1.4)',
+//     transition: 'transform 300ms ease-out',
+//   },
+//   padding: '3px 8px 3px 10px',
+//   width: '14px',
+//   height: 'auto',
+//   content: 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")',
+// };
 
 class Follow extends React.Component {
   constructor(props) {
@@ -55,11 +77,12 @@ class Follow extends React.Component {
   }
 
   render() {
-    let { swapHeart } = this.state;
-    console.log(swapHeart);
+    const { swapHeart } = this.state;
+
     return (
       <Container onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {swapHeart ? <BigHeart /> : <SmallHeart />}
+        {/* <SmallHeart id="big" /> */}
+        <SmallHeart id="big" />
         <Word>
           Follow
         </Word>

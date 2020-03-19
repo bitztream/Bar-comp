@@ -8,12 +8,14 @@ import BackgroundPic from './BackgroundPic';
 import StreamerInfo from './StreamerInfo';
 import Verified from './Verified';
 import Follow from './Follow';
+import Subscribe from './Subscribe';
 
 const NavDiv = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   background-color: white;
-  height: 44px;
+  height: 50px;
   padding-top: 0;
 `;
 
@@ -22,24 +24,26 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: ${(props) => props.nav ? 'space-evenly' : 'center'};
-  padding-left: ${(props) => props.nav ? '40px' : '10px'}
+  padding-left: ${(props) => props.nav ? '40px' : '10px'};
+  padding-right: ${(props) => props.end ? '10px' : '0px'};
 
 `;
 
 const Live = styled.div`
-  height: 14px;
+  height: 16px;
   font-family: "Open Sans";
   font-weight: 700;
   background-color: red;
-  border-radius: 3px;
+  border-radius: 4px;
   color: white;
-  font-size: 11px;
-  padding: 0 4px 2px;
+  font-size: 12px;
+  padding: 0 5px 2px 4px;
 `;
 
 const NavButton = styled.h5`
   font-family: 'Roboto', sans-serif;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
+  font-size: 14px;
   margin: 0 10px;
   border-bottom: ${props => props.selected ? 'solid 2px #8643eb' : 'solid 1px white'};
   color: ${props => props.selected ? '#8643eb' : 'black'};
@@ -79,29 +83,37 @@ class MainBar extends React.Component {
   }
 
   render() {
+    const {
+      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked,
+    } = this.state;
+
     return (
       <DivCol>
-        {this.state.streamerIsClicked
-          ? <BackgroundPic pickUrl={this.state.backgroundPicUrl} /> : <div />}
+        {streamerIsClicked ? <BackgroundPic pickUrl={backgroundPicUrl} /> : <div />}
         <NavDiv>
-          <DivRow>
-            <StreamerInfo avatar={this.state.avatarPicUrl} click={this.handleStreamerClick} />
+          <DivRow onClick={this.handleStreamerClick}>
+            <StreamerInfo name={name} avatar={avatarPicUrl} />
             <Div>
-              {this.state.isVerified ? <Verified /> : false}
+              {isVerified ? <Verified /> : false}
             </Div>
             <Div>
-              {this.state.isLive ? <Live>LIVE</Live> : false}
-            </Div>
-            <Div nav>
-              <NavButton selected>Home</NavButton>
-              <NavButton>Videos</NavButton>
-              <NavButton>Clips</NavButton>
-              <NavButton>Followers</NavButton>
-            </Div>
-            <Div nav>
-              <Follow />
+              {isLive ? <Live>LIVE</Live> : false}
             </Div>
           </DivRow>
+          <Div nav>
+            <NavButton selected>Home</NavButton>
+            <NavButton>Videos</NavButton>
+            <NavButton>Clips</NavButton>
+            <NavButton>Followers</NavButton>
+          </Div>
+          <Div nav end>
+            <Div>
+              <Follow />
+            </Div>
+            <Div>
+              <Subscribe />
+            </Div>
+          </Div>
         </NavDiv>
       </DivCol>
     );
