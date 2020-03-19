@@ -8,22 +8,6 @@ const Wrapper = styled.div`
   justify-items: space-between;
 `;
 
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   border-radius: 5px;
-//   height: 30px;
-//   justify-content: space-around;
-//   color: white;
-//   width: 80px;
-//   background-color: #8643eb;
-  
-//   &:hover {
-//     background-color: #772ce8;
-//   }
-// `;
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -118,15 +102,15 @@ class Follow extends React.Component {
   }
 
   handleClick(e) {
-    // const { box } = e.target.dataset;
-    // document.getElementById(id).style.width = '35px';
     const { subscribed, breakHeart } = this.state;
     this.setState({ subscribed: !subscribed, breakHeart: false });
   }
 
   render() {
     // const { click } = this.props;
-    const { growHeart, breakHeart, mute, subscribed } = this.state;
+    const {
+      growHeart, breakHeart, mute, subscribed,
+    } = this.state;
     const bigUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")';
     const smallUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png")';
     const blackHeart = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/blackHeart.png")';
