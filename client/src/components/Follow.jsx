@@ -134,40 +134,49 @@ class Follow extends React.Component {
     const notifications = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/black_notification.png")';
     const mutedNotifications = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/muteNotification.png")';
 
-    if (!subscribed) {
-      return (
-        <Container
-          data-box="white"
-          onMouseEnter={this.mouseEnter}
-          onMouseLeave={this.mouseLeave}
-          onClick={this.handleClick}
-        >
-          {growHeart ? <Heart data-box="white" style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
-            : <Heart data-box="white" style={{ transition: '400ms', transform: 'scale(1)', content: smallUrl }} />}
-          <Word>
-            Follow
-          </Word>
-        </Container>
-      );
-    }
     return (
       <Wrapper>
-        <Container
-          style={{ transition: 'width 500ms' }}
-          data-box="black"
-          small
-          onMouseEnter={this.mouseEnter}
-          onMouseLeave={this.mouseLeave}
-          onClick={this.handleClick}
-        >
-          {breakHeart ? <BlackHeart style={{ transition: '300ms', transform: 'scale(1.1)', content: brokenHeart }} />
-            : <BlackHeart style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
-        </Container>
+        {!subscribed
+          ? (
+            <Container
+              data-box="white"
+              onMouseEnter={this.mouseEnter}
+              onMouseLeave={this.mouseLeave}
+              onClick={this.handleClick}
+              style={{ transition: 'width 800ms' }}
+            >
+              {growHeart ? <Heart data-box="white" style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
+                : <Heart data-box="white" style={{ transition: '400ms', transform: 'scale(1)', content: smallUrl }} />}
+              <Word>
+                Follow
+              </Word>
+            </Container>
+          ) : (
+            <Container
+              style={{ transition: 'width 800ms' }}
+              data-box="black"
+              small
+              onMouseEnter={this.mouseEnter}
+              onMouseLeave={this.mouseLeave}
+              onClick={this.handleClick}
+            >
+              {breakHeart ? <BlackHeart style={{ transition: '300ms', transform: 'scale(1.1)', content: brokenHeart }} />
+                : <BlackHeart style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
+            </Container>
+          )}
 
-        <ContainerS data-box="notification" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} onClick={this.handleClick}>
-          {mute ? <Notification style={{ transition: '300ms', transform: 'scale(1.1)', content: mutedNotifications }} />
-            : <Notification style={{ transition: '400ms', transform: 'scale(1)', content: notifications }} />}
-        </ContainerS>
+        {subscribed
+          ? (
+            <ContainerS
+              data-box="notification"
+              onMouseEnter={this.mouseEnter}
+              onMouseLeave={this.mouseLeave}
+              onClick={this.handleClick}
+            >
+              {mute ? <Notification style={{ transition: '300ms', transform: 'scale(1.1)', content: mutedNotifications }} />
+                : <Notification style={{ transition: '400ms', transform: 'scale(1)', content: notifications }} />}
+            </ContainerS>
+          ) : false}
       </Wrapper>
     );
   }
