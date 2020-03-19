@@ -12,16 +12,11 @@ const Container = styled.div`
   width: 80px;
   background-color: #8643eb;
 
-  #big {
-    transform: scale(1);
-    transition: transform 300ms ease-out;
-  }
-
   &:hover {
     background-color: #772ce8;
     #big {
-      transform: scale(1.2);
-      transition: transform 300ms ease-out;
+      transition: transform 300ms;
+      transform: scale(1.3); 
     }
   }
 `;
@@ -39,6 +34,7 @@ const BigHeart = styled.img`
   width: 14px;
   height: auto;
   content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png");
+  transition: transform 300ms;
 `;
 
 
@@ -48,17 +44,6 @@ const Word = styled.h5`
   font-size: 12px;
   font-weight: 600;
 `;
-
-// const transform = {
-//   ':hover': {
-//     transform: 'scale(1.4)',
-//     transition: 'transform 300ms ease-out',
-//   },
-//   padding: '3px 8px 3px 10px',
-//   width: '14px',
-//   height: 'auto',
-//   content: 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")',
-// };
 
 class Follow extends React.Component {
   constructor(props) {
@@ -81,8 +66,7 @@ class Follow extends React.Component {
 
     return (
       <Container onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {/* <SmallHeart id="big" /> */}
-        <SmallHeart id="big" />
+        {swapHeart ? <BigHeart id="big" style={{ transition: '300ms', transform: 'scale(1.3)' }} /> : <BigHeart />}
         <Word>
           Follow
         </Word>
