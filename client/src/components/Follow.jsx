@@ -14,17 +14,32 @@ const Container = styled.div`
   align-items: center;
   border-radius: 5px;
   height: 30px;
-  justify-content: ${(props) => (props.small ? 'center' : 'space-around')};
+  justify-content: space-around;
   color: white;
-  width: ${(props) => (props.small ? '35px' : '80px')};
-  margin-right: ${(props) => (props.small ? '5px' : '0px')};
-  background-color: ${(props) => (props.small ? '#dcdce0' : '#8643eb')};
+  width: 80px;
+  background-color: #8643eb;
   
-
   &:hover {
-    background-color: ${(props) => (props.small ? '#cc0404' : '#772ce8')};
+    background-color: #772ce8;
   }
 `;
+
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   border-radius: 5px;
+//   height: 30px;
+//   justify-content: ${(props) => (props.small ? 'center' : 'space-around')};
+//   color: white;
+//   width: ${(props) => (props.small ? '35px' : '80px')};
+//   margin-right: ${(props) => (props.small ? '5px' : '0px')};
+//   background-color: ${(props) => (props.small ? '#dcdce0' : '#8643eb')};
+  
+//   &:hover {
+//     background-color: ${(props) => (props.small ? '#cc0404' : '#772ce8')};
+//   }
+// `;
 
 const ContainerS = styled.div`
   display: flex;
@@ -103,8 +118,7 @@ class Follow extends React.Component {
   }
 
   handleClick(e) {
-    const { id } = e.target.id;
-    console.log('target clicked: ',e.target);
+    // const { box } = e.target.dataset;
     // document.getElementById(id).style.width = '35px';
     const { subscribed, breakHeart } = this.state;
     this.setState({ subscribed: !subscribed, breakHeart: false });
@@ -141,7 +155,6 @@ class Follow extends React.Component {
         <Container
           style={{ transition: 'width 500ms' }}
           data-box="black"
-          id="animation"
           small
           onMouseEnter={this.mouseEnter}
           onMouseLeave={this.mouseLeave}
