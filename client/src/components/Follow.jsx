@@ -24,22 +24,14 @@ const Container = styled.div`
 
 const SmallHeart = styled.img`
   padding: 3px 8px 3px 10px;
-  width: 14px;
+  width: 16px;
   height: auto;
   content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png");
 `;
 
-const BigHeart = styled.img`
-  padding: 3px 8px 3px 10px;
-  width: 14px;
-  height: auto;
-  content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png");
-  transition: transform 300ms;
-`;
-
 
 const Word = styled.h5`
-  padding: 4px 8px 4px 0;
+  padding: 4px 10px 4px 0;
   font-family: "Open Sans";
   font-size: 12px;
   font-weight: 600;
@@ -63,10 +55,13 @@ class Follow extends React.Component {
 
   render() {
     const { swapHeart } = this.state;
+    const bigUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")';
+    const smallUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png")';
 
     return (
       <Container onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-        {swapHeart ? <BigHeart id="big" style={{ transition: '300ms', transform: 'scale(1.3)' }} /> : <BigHeart />}
+        {swapHeart ? <SmallHeart style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
+          : <SmallHeart style={{ transition: '300ms', transform: 'scale(1)', content: smallUrl }} />}
         <Word>
           Follow
         </Word>
