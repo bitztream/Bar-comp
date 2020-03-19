@@ -14,10 +14,6 @@ const Container = styled.div`
 
   &:hover {
     background-color: #772ce8;
-    #big {
-      transition: transform 300ms;
-      transform: scale(1.3); 
-    }
   }
 `;
 
