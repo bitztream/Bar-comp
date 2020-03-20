@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import DivCol from './DivCol';
 import DivRow from './DivRow';
 import data from './fakeData';
-import BackgroundPic from './BackgroundPic';
 import StreamerInfo from './StreamerInfo';
 import Verified from './Verified';
 import Follow from './Follow';
 import Subscribe from './Subscribe';
+
+const BackgroundPic = styled.img`
+  max-height: '300px'
+`;
 
 const NavDiv = styled.div`
   display: flex;
@@ -25,8 +28,7 @@ const Div = styled.div`
   align-items: center;
   justify-content: ${(props) => (props.nav ? 'space-evenly' : 'center')};
   padding-left: ${(props) => (props.nav ? '40px' : '10px')};
-  padding-right: ${(props) => (props.end ? '10px' : '0px')};
-
+  padding-right: ${(props) => (props.last ? '10px' : '0px')};
 `;
 
 const Live = styled.div`
@@ -45,8 +47,9 @@ const NavButton = styled.h5`
   padding-bottom: 8px;
   font-size: 14px;
   margin: 0 10px;
-  border-bottom: ${props => props.selected ? 'solid 2px #8643eb' : 'solid 1px white'};
-  color: ${props => props.selected ? '#8643eb' : 'black'};
+  border-bottom: ${(props) => (props.selected ? 'solid 2px #8643eb' : 'solid 1px white')};
+  color: ${(props) => (props.selected ? '#8643eb' : 'black')};
+  transition: border-bottom 500ms;
   &:hover {
     color: #8643eb;
   }
@@ -59,6 +62,7 @@ class MainBar extends React.Component {
     super(props);
     this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.subscribeClick = this.subscribeClick.bind(this);
+    this.handleNavClick = this.handleNavClick.bind(this);
     this.state = {
       isLive: true,
       streamerIsClicked: false,
@@ -83,18 +87,37 @@ class MainBar extends React.Component {
     this.setState({ streamerIsClicked: !current });
   }
 
+  handleNavClick(e) {
+    const { btnname } = e.target.dataset;
+    this.setState({ page: btnname });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   subscribeClick() {
     // this.setState({ isSubscribed: true });
   }
 
   render() {
     const {
-      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
+      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed, page,
     } = this.state;
+    const realUrl = `url(${backgroundPicUrl})`;
 
     return (
-      <DivCol>
-        {streamerIsClicked ? <BackgroundPic pickUrl={backgroundPicUrl} /> : <div />}
+      <DivCol style={{ 'background-color': 'black' }}>
+        {!streamerIsClicked
+          ? (
+            <BackgroundPic style={{
+              height: '0px', width: '50%', transition: 'height 600ms, width 700ms', content: realUrl,
+            }}
+            />
+          )
+          : (
+            <BackgroundPic style={{
+              height: '300px', width: '100%', transition: 'height 600ms, width 600ms', content: realUrl,
+            }}
+            />
+          )}
         <NavDiv>
           <DivRow onClick={this.handleStreamerClick}>
             <StreamerInfo name={name} avatar={avatarPicUrl} />
@@ -106,12 +129,12 @@ class MainBar extends React.Component {
             </Div>
           </DivRow>
           <Div nav>
-            <NavButton selected>Home</NavButton>
-            <NavButton>Videos</NavButton>
-            <NavButton>Clips</NavButton>
-            <NavButton>Followers</NavButton>
+            <NavButton data-btnname="home" selected={page === 'home'} onClick={this.handleNavClick}>Home</NavButton>
+            <NavButton data-btnname="videos" selected={page === 'videos'} onClick={this.handleNavClick}>Videos</NavButton>
+            <NavButton data-btnname="clips" selected={page === 'clips'} onClick={this.handleNavClick}>Clips</NavButton>
+            <NavButton data-btnname="followers" selected={page === 'followers'} onClick={this.handleNavClick}>Followers</NavButton>
           </Div>
-          <Div nav end>
+          <Div nav last>
             <Div>
               <Follow click={this.subscribeClick} />
             </Div>
