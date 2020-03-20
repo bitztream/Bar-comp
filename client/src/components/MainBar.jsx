@@ -23,9 +23,9 @@ const Div = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: ${(props) => props.nav ? 'space-evenly' : 'center'};
-  padding-left: ${(props) => props.nav ? '40px' : '10px'};
-  padding-right: ${(props) => props.end ? '10px' : '0px'};
+  justify-content: ${(props) => (props.nav ? 'space-evenly' : 'center')};
+  padding-left: ${(props) => (props.nav ? '40px' : '10px')};
+  padding-right: ${(props) => (props.end ? '10px' : '0px')};
 
 `;
 
@@ -58,6 +58,7 @@ class MainBar extends React.Component {
   constructor(props) {
     super(props);
     this.handleStreamerClick = this.handleStreamerClick.bind(this);
+    this.subscribeClick = this.subscribeClick.bind(this);
     this.state = {
       isLive: true,
       streamerIsClicked: false,
@@ -82,9 +83,13 @@ class MainBar extends React.Component {
     this.setState({ streamerIsClicked: !current });
   }
 
+  subscribeClick() {
+    // this.setState({ isSubscribed: true });
+  }
+
   render() {
     const {
-      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked,
+      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
     } = this.state;
 
     return (
@@ -108,10 +113,10 @@ class MainBar extends React.Component {
           </Div>
           <Div nav end>
             <Div>
-              <Follow />
+              <Follow click={this.subscribeClick} />
             </Div>
             <Div>
-              <Subscribe />
+              {isSubscribed ? <Subscribe is /> : <Subscribe />}
             </Div>
           </Div>
         </NavDiv>
