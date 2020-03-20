@@ -47,7 +47,7 @@ const NavButton = styled.h5`
   padding-bottom: 8px;
   font-size: 14px;
   margin: 0 10px;
-  border-bottom: ${(props) => (props.selected ? 'solid 2px #8643eb' : 'solid 1px white')};
+  border-bottom: ${(props) => (props.selected ? 'solid 2px #8643eb' : 'solid 2px white')};
   color: ${(props) => (props.selected ? '#8643eb' : 'black')};
   transition: border-bottom 500ms;
   &:hover {
