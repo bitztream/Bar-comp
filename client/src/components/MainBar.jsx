@@ -25,8 +25,7 @@ const Div = styled.div`
   align-items: center;
   justify-content: ${(props) => (props.nav ? 'space-evenly' : 'center')};
   padding-left: ${(props) => (props.nav ? '40px' : '10px')};
-  padding-right: ${(props) => (props.end ? '10px' : '0px')};
-
+  padding-right: ${(props) => (props.last ? '10px' : '0px')};
 `;
 
 const Live = styled.div`
@@ -111,7 +110,7 @@ class MainBar extends React.Component {
             <NavButton>Clips</NavButton>
             <NavButton>Followers</NavButton>
           </Div>
-          <Div nav end>
+          <Div nav last>
             <Div>
               <Follow click={this.subscribeClick} />
             </Div>
