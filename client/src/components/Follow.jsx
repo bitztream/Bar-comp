@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-items: space-between;
+  width: 82px;
 `;
 
 const Container = styled.div`
@@ -25,14 +26,8 @@ const Container = styled.div`
   }
 `;
 
-const ContainerS = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+const ContainerS = styled(Container)`
   margin: 0 5px;
-  height: 30px;
   width: 35px;
   background-color: #dcdce0;
 
@@ -56,7 +51,6 @@ const BlackHeart = styled.img`
 const Notification = styled.img`
   width: 16px;
   height: auto;
-  content: url("https://bitztreambar.s3-us-west-1.amazonaws.com/black_notification.png");
 `;
 
 const Word = styled.h5`
@@ -69,10 +63,13 @@ const Word = styled.h5`
 class Follow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { growHeart: false, subscribed: false, breakHeart: false, mute: false };
+    this.state = {
+      growHeart: false, subscribed: false, breakHeart: false, muteEffect: false, notificationsOn: true,
+    };
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.notificationClick = this.notificationClick.bind(this);
   }
 
   mouseEnter(e) {
@@ -84,7 +81,7 @@ class Follow extends React.Component {
       this.setState({ breakHeart: true });
     }
     if (box === 'notification') {
-      this.setState({ mute: true });
+      this.setState({ muteEffect: true });
     }
   }
 
@@ -97,19 +94,24 @@ class Follow extends React.Component {
       this.setState({ breakHeart: false });
     }
     if (box === 'notification') {
-      this.setState({ mute: false });
+      this.setState({ muteEffect: false });
     }
   }
 
   handleClick(e) {
-    const { subscribed, breakHeart } = this.state;
+    const { subscribed } = this.state;
     this.setState({ subscribed: !subscribed, breakHeart: false });
+  }
+
+  notificationClick() {
+    const { notificationsOn } = this.state;
+    this.setState({ notificationsOn: !notificationsOn });
   }
 
   render() {
     // const { click } = this.props;
     const {
-      growHeart, breakHeart, mute, subscribed,
+      growHeart, breakHeart, muteEffect, subscribed, notificationsOn,
     } = this.state;
     const bigUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")';
     const smallUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png")';
@@ -117,6 +119,7 @@ class Follow extends React.Component {
     const brokenHeart = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/broken_heart.png")';
     const notifications = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/black_notification.png")';
     const mutedNotifications = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/muteNotification.png")';
+    const hollowNotifications = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/hollowNotifications.png")';
 
     return (
       <Wrapper>
@@ -129,23 +132,23 @@ class Follow extends React.Component {
               onClick={this.handleClick}
               style={{ transition: 'width 800ms' }}
             >
-              {growHeart ? <Heart data-box="white" style={{ transition: '300ms', transform: 'scale(1.2)', content: bigUrl }} />
-                : <Heart data-box="white" style={{ transition: '400ms', transform: 'scale(1)', content: smallUrl }} />}
+              {growHeart ? <Heart data-box="white" style={{ transition: '400ms', transform: 'scale(1.2)', content: bigUrl }} />
+                : <Heart data-box="white" style={{ transition: '450ms', transform: 'scale(1)', content: smallUrl }} />}
               <Word>
                 Follow
               </Word>
             </Container>
           ) : (
             <Container
-              style={{ transition: 'width 800ms' }}
+              style={{ transition: 'width 400ms' }}
               data-box="black"
               small
               onMouseEnter={this.mouseEnter}
               onMouseLeave={this.mouseLeave}
               onClick={this.handleClick}
             >
-              {breakHeart ? <BlackHeart style={{ transition: '300ms', transform: 'scale(1.1)', content: brokenHeart }} />
-                : <BlackHeart style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
+              {breakHeart ? <BlackHeart data-box="black" style={{ transition: '400ms', transform: 'scale(1.1)', content: brokenHeart }} />
+                : <BlackHeart grey data-box="black" style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
             </Container>
           )}
 
@@ -155,10 +158,10 @@ class Follow extends React.Component {
               data-box="notification"
               onMouseEnter={this.mouseEnter}
               onMouseLeave={this.mouseLeave}
-              onClick={this.handleClick}
+              onClick={this.notificationClick}
             >
-              {mute ? <Notification style={{ transition: '300ms', transform: 'scale(1.1)', content: mutedNotifications }} />
-                : <Notification style={{ transition: '400ms', transform: 'scale(1)', content: notifications }} />}
+              {!muteEffect ? <Notification data-box="notification" style={{ transition: '300ms', transform: 'scale(1)', content: (notificationsOn ? notifications : hollowNotifications) }} />
+                : <Notification data-box="notification" style={{ transition: '400ms', transform: 'scale(1.3)', content: (notificationsOn ? mutedNotifications : notifications) }} />}
             </ContainerS>
           ) : false}
       </Wrapper>
