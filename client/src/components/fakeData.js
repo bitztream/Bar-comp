@@ -50,7 +50,7 @@ const data = {
     'u5408',
     'surfing_man',
     'hippopotamus' ],
- name: 'MyWhiteEltonXX',
+ name: 'YumboJohnXX3000',
  avatarPicUrl: 'https://loremflickr.com/80/80',
  backgroundPicUrl: 'https://loremflickr.com/600/400',
  customEmotesCount: 44 };

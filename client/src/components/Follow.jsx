@@ -148,7 +148,7 @@ class Follow extends React.Component {
               onClick={this.handleClick}
             >
               {breakHeart ? <BlackHeart data-box="black" style={{ transition: '400ms', transform: 'scale(1.1)', content: brokenHeart }} />
-                : <BlackHeart grey data-box="black" style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
+                : <BlackHeart data-box="black" style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
             </Container>
           )}
 

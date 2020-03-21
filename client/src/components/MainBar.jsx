@@ -9,6 +9,23 @@ import Verified from './Verified';
 import Follow from './Follow';
 import Subscribe from './Subscribe';
 
+const Bubble = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 4;
+  left: ${(props) => (props.live ? '240px' : '195px')};
+  background-color: black;
+  color: white;
+  width: ${(props) => (props.live ? '58px' : '86px')};
+  height: 20px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: arial;
+  font-weight: 600;
+`;
+
 const BackgroundPic = styled.img`
   max-height: '300px'
 `;
@@ -63,18 +80,22 @@ class MainBar extends React.Component {
     this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.subscribeClick = this.subscribeClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
+    this.handleBubbleIn = this.handleBubbleIn.bind(this);
+    this.handleBubbleOut = this.handleBubbleOut.bind(this);
     this.state = {
       isLive: true,
       streamerIsClicked: false,
       isVerified: true,
       isSubscribed: false,
-      subscriptionEmotes: [],
-      customEmotes: [],
+      // subscriptionEmotes: [],
+      // customEmotes: [],
       name: '',
       avatarPicUrl: '',
       backgroundPicUrl: '',
-      customEmotesCount: 0,
+      // customEmotesCount: 0,
       page: 'home',
+      bubbleLive: 0,
+      bubbleVerified: 0,
     };
   }
 
@@ -92,6 +113,27 @@ class MainBar extends React.Component {
     this.setState({ page: btnname });
   }
 
+  handleBubbleIn(e) {
+    const { status } = e.target.dataset;
+    const rect = e.target.getBoundingClientRect();
+    if (status === 'live') {
+      this.setState({ bubbleLive: rect.x });
+    }
+    if (status === 'verified') {
+      this.setState({ bubbleVerified: rect.x });
+    }
+  }
+
+  handleBubbleOut(e) {
+    const { status } = e.target.dataset;
+    if (status === 'live') {
+      this.setState({ bubbleLive: 0 });
+    }
+    if (status === 'verified') {
+      this.setState({ bubbleVerified: 0 });
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   subscribeClick() {
     // this.setState({ isSubscribed: true });
@@ -99,12 +141,13 @@ class MainBar extends React.Component {
 
   render() {
     const {
-      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed, page,
+      name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
+      page, bubbleVerified, bubbleLive,
     } = this.state;
     const realUrl = `url(${backgroundPicUrl})`;
 
     return (
-      <DivCol style={{ 'background-color': 'black' }}>
+      <DivCol style={{ backgroundColor: 'black' }}>
         {!streamerIsClicked
           ? (
             <BackgroundPic style={{
@@ -119,28 +162,38 @@ class MainBar extends React.Component {
             />
           )}
         <NavDiv>
+
           <DivRow onClick={this.handleStreamerClick}>
             <StreamerInfo name={name} avatar={avatarPicUrl} />
+
             <Div>
-              {isVerified ? <Verified /> : false}
+              {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut}/> : false}
+              {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 30) }}>Verified User</Bubble> : false}
             </Div>
+
             <Div>
-              {isLive ? <Live>LIVE</Live> : false}
+              {isLive ? <Live data-status="live" onMouseEnter={this.handleBubbleIn} onMouseLeave={this.handleBubbleOut}>LIVE</Live> : false}
+              {bubbleLive ? <Bubble style={{ left: (bubbleLive + 38) }} live>Live Now</Bubble> : false}
             </Div>
+
           </DivRow>
+
           <Div nav>
             <NavButton data-btnname="home" selected={page === 'home'} onClick={this.handleNavClick}>Home</NavButton>
             <NavButton data-btnname="videos" selected={page === 'videos'} onClick={this.handleNavClick}>Videos</NavButton>
             <NavButton data-btnname="clips" selected={page === 'clips'} onClick={this.handleNavClick}>Clips</NavButton>
             <NavButton data-btnname="followers" selected={page === 'followers'} onClick={this.handleNavClick}>Followers</NavButton>
           </Div>
+
           <Div nav last>
             <Div>
               <Follow click={this.subscribeClick} />
             </Div>
+
             <Div>
               {isSubscribed ? <Subscribe is /> : <Subscribe />}
             </Div>
+
           </Div>
         </NavDiv>
       </DivCol>
