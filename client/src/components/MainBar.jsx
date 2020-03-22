@@ -8,27 +8,9 @@ import StreamerInfo from './StreamerInfo';
 import Verified from './Verified';
 import Follow from './Follow';
 import Subscribe from './Subscribe';
-
-const Bubble = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 4;
-  left: ${(props) => (props.live ? '240px' : '195px')};
-  background-color: black;
-  color: white;
-  width: ${(props) => (props.live ? '58px' : '86px')};
-  height: 20px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-family: arial;
-  font-weight: 600;
-`;
-
-const BackgroundPic = styled.img`
-  max-height: '300px'
-`;
+import BackgroundPic from './BackgroundPic';
+import Bubble from './Bubble';
+import Live from './Live';
 
 const NavDiv = styled.div`
   display: flex;
@@ -46,17 +28,6 @@ const Div = styled.div`
   justify-content: ${(props) => (props.nav ? 'space-evenly' : 'center')};
   padding-left: ${(props) => (props.nav ? '40px' : '10px')};
   padding-right: ${(props) => (props.last ? '10px' : '0px')};
-`;
-
-const Live = styled.div`
-  height: 16px;
-  font-family: "Open Sans";
-  font-weight: 700;
-  background-color: red;
-  border-radius: 4px;
-  color: white;
-  font-size: 12px;
-  padding: 0 5px 2px 4px;
 `;
 
 const NavButton = styled.h5`
@@ -150,16 +121,10 @@ class MainBar extends React.Component {
       <DivCol style={{ backgroundColor: 'black' }}>
         {!streamerIsClicked
           ? (
-            <BackgroundPic style={{
-              height: '0px', width: '50%', transition: 'height 600ms, width 700ms', content: realUrl,
-            }}
-            />
+            <BackgroundPic imgUrl={realUrl} style={{ height: '0px', width: '50%', transition: 'height 600ms, width 700ms' }} />
           )
           : (
-            <BackgroundPic style={{
-              height: '300px', width: '100%', transition: 'height 600ms, width 600ms', content: realUrl,
-            }}
-            />
+            <BackgroundPic imgUrl={realUrl} style={{ height: '400px', width: '100%', transition: 'height 600ms, width 600ms' }} />
           )}
         <NavDiv>
 
