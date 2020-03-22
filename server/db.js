@@ -5,20 +5,22 @@ mongoose.connect('mongodb://localhost/bar-comp', {useCreateIndex: true,  useNewU
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', () => {
   console.log('Connected to DB!');
 });
 
 const streamerSchema = new mongoose.Schema({
   name: {
     type: String,
-    unique: true
+    unique: true,
   },
   avatarPicUrl: String,
   backgroundPicUrl: String,
   subscriptionEmotes: Array,
   customEmotes: Array,
   customEmotesCount: Number,
+  followersCount: Number,
+  subscribers: Number,
 });
 
 const Streamer = mongoose.model('Streamer', streamerSchema);
