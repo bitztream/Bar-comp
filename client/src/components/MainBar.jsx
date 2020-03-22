@@ -167,7 +167,7 @@ class MainBar extends React.Component {
             <StreamerInfo name={name} avatar={avatarPicUrl} />
 
             <Div>
-              {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut}/> : false}
+              {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut} /> : false}
               {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 30) }}>Verified User</Bubble> : false}
             </Div>
 
