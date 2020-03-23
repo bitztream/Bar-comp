@@ -147,8 +147,8 @@ class Follow extends React.Component {
               onMouseLeave={this.mouseLeave}
               onClick={this.handleClick}
             >
-              {breakHeart ? <BlackHeart data-box="black" style={{ transition: '400ms', transform: 'scale(1.1)', content: brokenHeart }} />
-                : <BlackHeart data-box="black" style={{ transition: '400ms', transform: 'scale(1)', content: blackHeart }} />}
+              {breakHeart ? <BlackHeart data-box="black" style={{ transition: '440ms', transform: 'scale(1.12)', content: brokenHeart }} />
+                : <BlackHeart data-box="black" style={{ transition: '500ms', transform: 'scale(0.95)', content: blackHeart }} />}
             </Container>
           )}
 
