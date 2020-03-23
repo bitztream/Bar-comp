@@ -135,6 +135,9 @@ class MainBar extends React.Component {
   }
 
   handleDropdownClick(e) {
+
+    // Incomplete !!!!!
+    
     const { pages, visiblePages } = this.state;
     const { btnname } = e.target.dataset;
     const maxVisibleIndex = visiblePages - 1;
