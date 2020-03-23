@@ -11,8 +11,11 @@ import Subscribe from './Subscribe';
 import BackgroundPic from './BackgroundPic';
 import Bubble from './Bubble';
 import Live from './Live';
+import Menu from './Menu';
+import DropMenu from './DropMenu';
+import NavButton from './NavButton';
 
-const NavDiv = styled.div`
+const BarDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -26,21 +29,8 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: ${(props) => (props.nav ? 'space-evenly' : 'center')};
-  padding-left: ${(props) => (props.nav ? '40px' : '10px')};
+  padding-left: 10px;
   padding-right: ${(props) => (props.last ? '10px' : '0px')};
-`;
-
-const NavButton = styled.h5`
-  font-family: 'Roboto', sans-serif;
-  padding-bottom: 8px;
-  font-size: 14px;
-  margin: 0 10px;
-  border-bottom: ${(props) => (props.selected ? 'solid 2px #8643eb' : 'solid 2px white')};
-  color: ${(props) => (props.selected ? '#8643eb' : 'black')};
-  transition: border-bottom 500ms;
-  &:hover {
-    color: #8643eb;
-  }
 `;
 
 const dataSample = data;
@@ -53,6 +43,8 @@ class MainBar extends React.Component {
     this.handleNavClick = this.handleNavClick.bind(this);
     this.handleBubbleIn = this.handleBubbleIn.bind(this);
     this.handleBubbleOut = this.handleBubbleOut.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.handleResizeMain = this.handleResizeMain.bind(this);
     this.state = {
       isLive: true,
       streamerIsClicked: false,
@@ -64,14 +56,19 @@ class MainBar extends React.Component {
       avatarPicUrl: '',
       backgroundPicUrl: '',
       // customEmotesCount: 0,
-      page: 'home',
+      // page: 'home',
       bubbleLive: 0,
       bubbleVerified: 0,
+      page: 'home',
+      windowWidth: window.innerWidth,
+      menuClicked: false,
+      menuPosition: 0,
     };
   }
 
   componentDidMount() {
     this.setState(dataSample);
+    window.addEventListener('resize', this.handleResizeMain);
   }
 
   handleStreamerClick() {
@@ -110,57 +107,95 @@ class MainBar extends React.Component {
     // this.setState({ isSubscribed: true });
   }
 
+  handleResizeMain() {
+    const newWidth = window.innerWidth;
+    this.setState({ windowWidth: newWidth });
+  }
+
+  handleMenuClick(e) {
+    const { menuClicked } = this.state;
+    const rect = e.target.getBoundingClientRect();
+    this.setState({ menuClicked: !menuClicked, menuPosition: rect.x });
+  }
+
   render() {
     const {
       name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
-      page, bubbleVerified, bubbleLive,
+      page, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth,
     } = this.state;
     const realUrl = `url(${backgroundPicUrl})`;
 
     return (
-      <DivCol style={{ backgroundColor: 'black' }}>
-        {!streamerIsClicked
+      <DivCol>
+        <DivCol style={{ backgroundColor: 'black' }}>
+          {!streamerIsClicked
+            ? (
+              <BackgroundPic imgUrl={realUrl} style={{ height: '0px', width: '50%', transition: 'height 600ms, width 700ms' }} />
+            )
+            : (
+              <BackgroundPic imgUrl={realUrl} style={{ height: '400px', width: '100%', transition: 'height 600ms, width 600ms' }} />
+            )}
+          <BarDiv>
+
+            <DivRow onClick={this.handleStreamerClick}>
+              <StreamerInfo name={name} avatar={avatarPicUrl} />
+
+              <Div>
+                {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut} /> : false}
+                {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 30) }}>Verified User</Bubble> : false}
+              </Div>
+
+              <Div>
+                {isLive ? <Live data-status="live" onMouseEnter={this.handleBubbleIn} onMouseLeave={this.handleBubbleOut}>LIVE</Live> : false}
+                {bubbleLive ? <Bubble style={{ left: (bubbleLive + 38) }} live>Live Now</Bubble> : false}
+              </Div>
+
+            </DivRow>
+
+            <Menu page={page} buttonClick={this.handleNavClick} dotsClick={this.handleMenuClick} />
+
+            <Div nav last>
+              <Div>
+                <Follow click={this.subscribeClick} />
+              </Div>
+
+              <Div>
+                {isSubscribed ? <Subscribe is /> : <Subscribe />}
+              </Div>
+
+            </Div>
+
+          </BarDiv>
+        </DivCol>
+        {menuClicked
           ? (
-            <BackgroundPic imgUrl={realUrl} style={{ height: '0px', width: '50%', transition: 'height 600ms, width 700ms' }} />
-          )
-          : (
-            <BackgroundPic imgUrl={realUrl} style={{ height: '400px', width: '100%', transition: 'height 600ms, width 600ms' }} />
-          )}
-        <NavDiv>
-
-          <DivRow onClick={this.handleStreamerClick}>
-            <StreamerInfo name={name} avatar={avatarPicUrl} />
-
-            <Div>
-              {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut} /> : false}
-              {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 30) }}>Verified User</Bubble> : false}
-            </Div>
-
-            <Div>
-              {isLive ? <Live data-status="live" onMouseEnter={this.handleBubbleIn} onMouseLeave={this.handleBubbleOut}>LIVE</Live> : false}
-              {bubbleLive ? <Bubble style={{ left: (bubbleLive + 38) }} live>Live Now</Bubble> : false}
-            </Div>
-
-          </DivRow>
-
-          <Div nav>
-            <NavButton data-btnname="home" selected={page === 'home'} onClick={this.handleNavClick}>Home</NavButton>
-            <NavButton data-btnname="videos" selected={page === 'videos'} onClick={this.handleNavClick}>Videos</NavButton>
-            <NavButton data-btnname="clips" selected={page === 'clips'} onClick={this.handleNavClick}>Clips</NavButton>
-            <NavButton data-btnname="followers" selected={page === 'followers'} onClick={this.handleNavClick}>Followers</NavButton>
-          </Div>
-
-          <Div nav last>
-            <Div>
-              <Follow click={this.subscribeClick} />
-            </Div>
-
-            <Div>
-              {isSubscribed ? <Subscribe is /> : <Subscribe />}
-            </Div>
-
-          </Div>
-        </NavDiv>
+            <DropMenu style={{ left: (menuPosition - 65), top: (streamerIsClicked ? '450px' : '50px') }}>
+              {(windowWidth < 676)
+                ? (
+                  <div>
+                    <NavButton data-btnname="videos" selected={page === 'videos'} onClick={this.handleNavClick}>
+                      Videos
+                    </NavButton>
+                  </div>
+                ) : false}
+              {(windowWidth < 746)
+                ? (
+                  <div>
+                    <NavButton data-btnname="clips" selected={page === 'clips'} onClick={this.handleNavClick}>
+                      Clips
+                    </NavButton>
+                  </div>
+                ) : false}
+              {(windowWidth < 801)
+                ? (
+                  <div>
+                    <NavButton data-btnname="followers" selected={page === 'followers'} onClick={this.handleNavClick}>
+                      Followers
+                    </NavButton>
+                  </div>
+                ) : false}
+            </DropMenu>
+          ) : false}
       </DivCol>
     );
   }
