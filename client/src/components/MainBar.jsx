@@ -45,6 +45,8 @@ class MainBar extends React.Component {
     this.handleBubbleOut = this.handleBubbleOut.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleResizeMain = this.handleResizeMain.bind(this);
+    this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.basePages = ['Home', 'Videos', 'Clips', 'Followers'];
     this.state = {
       isLive: true,
       streamerIsClicked: false,
@@ -59,7 +61,9 @@ class MainBar extends React.Component {
       // page: 'home',
       bubbleLive: 0,
       bubbleVerified: 0,
-      page: 'home',
+      page: 'Home',
+      pages: ['Home', 'Videos', 'Clips', 'Followers'],
+      visiblePages: 4,
       windowWidth: window.innerWidth,
       menuClicked: false,
       menuPosition: 0,
@@ -109,7 +113,19 @@ class MainBar extends React.Component {
 
   handleResizeMain() {
     const newWidth = window.innerWidth;
-    this.setState({ windowWidth: newWidth });
+    if (newWidth >= 800) {
+      console.log('back to normal arrangement');
+      this.setState({ windowWidth: newWidth, pages: this.basePages });
+    }
+    if (newWidth < 800) {
+      this.setState({ windowWidth: newWidth, visiblePages: 3 });
+    }
+    if (newWidth < 745) {
+      this.setState({ windowWidth: newWidth, visiblePages: 2 });
+    }
+    if (newWidth < 675) {
+      this.setState({ windowWidth: newWidth, visiblePages: 1 });
+    }
   }
 
   handleMenuClick(e) {
@@ -118,10 +134,21 @@ class MainBar extends React.Component {
     this.setState({ menuClicked: !menuClicked, menuPosition: rect.x });
   }
 
+  handleDropdownClick(e) {
+    const { pages, visiblePages } = this.state;
+    const { btnname } = e.target.dataset;
+    const maxVisibleIndex = visiblePages - 1;
+    const pageToReplace = pages[maxVisibleIndex];
+    console.log('replacing: ', pageToReplace);
+    const newArrangement = pages.splice(maxVisibleIndex, 1, btnname);
+    newArrangement.push(pageToReplace);
+    this.setState({ page: btnname, pages: newArrangement });
+  }
+
   render() {
     const {
       name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
-      page, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth,
+      page, pages, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth,
     } = this.state;
     const realUrl = `url(${backgroundPicUrl})`;
 
@@ -152,7 +179,7 @@ class MainBar extends React.Component {
 
             </DivRow>
 
-            <Menu page={page} buttonClick={this.handleNavClick} dotsClick={this.handleMenuClick} />
+            <Menu pages={pages} page={page} buttonClick={this.handleNavClick} dotsClick={this.handleMenuClick} />
 
             <Div nav last>
               <Div>
@@ -173,7 +200,7 @@ class MainBar extends React.Component {
               {(windowWidth < 676)
                 ? (
                   <div>
-                    <NavButton data-btnname="videos" selected={page === 'videos'} onClick={this.handleNavClick}>
+                    <NavButton data-btnname="Videos" selected={page === 'Videos'} onClick={this.handleDropdownClick}>
                       Videos
                     </NavButton>
                   </div>
@@ -181,7 +208,7 @@ class MainBar extends React.Component {
               {(windowWidth < 746)
                 ? (
                   <div>
-                    <NavButton data-btnname="clips" selected={page === 'clips'} onClick={this.handleNavClick}>
+                    <NavButton data-btnname="Clips" selected={page === 'Clips'} onClick={this.handleDropdownClick}>
                       Clips
                     </NavButton>
                   </div>
@@ -189,7 +216,7 @@ class MainBar extends React.Component {
               {(windowWidth < 801)
                 ? (
                   <div>
-                    <NavButton data-btnname="followers" selected={page === 'followers'} onClick={this.handleNavClick}>
+                    <NavButton data-btnname="Followers" selected={page === 'Followers'} onClick={this.handleDropdownClick}>
                       Followers
                     </NavButton>
                   </div>

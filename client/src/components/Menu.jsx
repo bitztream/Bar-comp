@@ -49,25 +49,32 @@ class Menu extends React.Component {
 
   render() {
     const { windowWidth } = this.state;
-    const { buttonClick, page } = this.props;
+    // eslint-disable-next-line react/prop-types
+    const { buttonClick, page, pages, dotsClick } = this.props;
     return (
       <NavDiv>
-        <NavButton data-btnname="home" selected={page === 'home'} onClick={buttonClick}>Home</NavButton>
-        {(windowWidth > 675)
+        <NavButton data-btnname="Home" selected={page === 'Home'} onClick={buttonClick}>Home</NavButton>
+        {(windowWidth >= 675)
           ? (
-            <NavButton data-btnname="videos" selected={page === 'videos'} onClick={buttonClick}>Videos</NavButton>
+            <NavButton data-btnname={pages[1]} selected={page === pages[1]} onClick={buttonClick}>
+              {pages[1]}
+            </NavButton>
           ) : false}
-        {(windowWidth > 745)
+        {(windowWidth >= 745)
           ? (
-            <NavButton data-btnname="clips" selected={page === 'clips'} onClick={buttonClick}>Clips</NavButton>
+            <NavButton data-btnname={pages[2]} selected={page === pages[2]} onClick={buttonClick}>
+              {pages[2]}
+            </NavButton>
           ) : false}
-        {(windowWidth > 800)
+        {(windowWidth >= 800)
           ? (
-            <NavButton data-btnname="followers" selected={page === 'followers'} onClick={buttonClick}>Followers</NavButton>
+            <NavButton data-btnname={pages[3]} selected={page === pages[3]} onClick={buttonClick}>
+              {pages[3]}
+            </NavButton>
           ) : false}
-        {(windowWidth < 801)
+        {(windowWidth < 800)
           ? (
-            <DivM onClick={this.props.dotsClick}>
+            <DivM onClick={dotsClick}>
               <NavDots />
               <NavDots />
               <NavDots />
