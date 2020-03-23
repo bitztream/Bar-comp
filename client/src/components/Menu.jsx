@@ -53,7 +53,9 @@ class Menu extends React.Component {
     const { buttonClick, page, pages, dotsClick } = this.props;
     return (
       <NavDiv>
-        <NavButton data-btnname="Home" selected={page === 'Home'} onClick={buttonClick}>Home</NavButton>
+        <NavButton data-btnname={pages[0]} selected={page === pages[0]} onClick={buttonClick}>
+          {pages[0]}
+        </NavButton>
         {(windowWidth >= 675)
           ? (
             <NavButton data-btnname={pages[1]} selected={page === pages[1]} onClick={buttonClick}>

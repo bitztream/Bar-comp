@@ -72,6 +72,7 @@ class MainBar extends React.Component {
 
   componentDidMount() {
     this.setState(dataSample);
+    this.handleResizeMain();
     window.addEventListener('resize', this.handleResizeMain);
   }
 
@@ -113,18 +114,17 @@ class MainBar extends React.Component {
 
   handleResizeMain() {
     const newWidth = window.innerWidth;
-    if (newWidth >= 800) {
-      console.log('back to normal arrangement');
-      this.setState({ windowWidth: newWidth, pages: this.basePages });
-    }
-    if (newWidth < 800) {
-      this.setState({ windowWidth: newWidth, visiblePages: 3 });
-    }
-    if (newWidth < 745) {
-      this.setState({ windowWidth: newWidth, visiblePages: 2 });
-    }
     if (newWidth < 675) {
       this.setState({ windowWidth: newWidth, visiblePages: 1 });
+    }
+    if (newWidth < 745 && newWidth >= 675) {
+      this.setState({ windowWidth: newWidth, visiblePages: 2 });
+    }
+    if (newWidth < 800 && newWidth >= 745) {
+      this.setState({ windowWidth: newWidth, visiblePages: 3 });
+    }
+    if (newWidth >= 800) {
+      this.setState({ windowWidth: newWidth, visiblePages: 4, pages: this.basePages });
     }
   }
 
@@ -135,17 +135,15 @@ class MainBar extends React.Component {
   }
 
   handleDropdownClick(e) {
-
-    // Incomplete !!!!!
-    
-    const { pages, visiblePages } = this.state;
+    const { visiblePages, pages } = this.state;
     const { btnname } = e.target.dataset;
     const maxVisibleIndex = visiblePages - 1;
     const pageToReplace = pages[maxVisibleIndex];
-    console.log('replacing: ', pageToReplace);
-    const newArrangement = pages.splice(maxVisibleIndex, 1, btnname);
-    newArrangement.push(pageToReplace);
-    this.setState({ page: btnname, pages: newArrangement });
+    const indexOfToReplace = pages.indexOf(btnname);
+    const newArrangement = pages.slice();
+    newArrangement.splice(maxVisibleIndex, 1, btnname);
+    newArrangement.splice(indexOfToReplace, 1, pageToReplace);
+    this.setState({ page: btnname, pages: newArrangement, menuClicked: false });
   }
 
   render() {
@@ -172,7 +170,7 @@ class MainBar extends React.Component {
 
               <Div>
                 {isVerified ? <Verified enter={this.handleBubbleIn} leave={this.handleBubbleOut} /> : false}
-                {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 30) }}>Verified User</Bubble> : false}
+                {bubbleVerified ? <Bubble style={{ left: (bubbleVerified + 22) }}>Verified User</Bubble> : false}
               </Div>
 
               <Div>
@@ -202,25 +200,25 @@ class MainBar extends React.Component {
             <DropMenu style={{ left: (menuPosition - 65), top: (streamerIsClicked ? '450px' : '50px') }}>
               {(windowWidth < 676)
                 ? (
-                  <div>
-                    <NavButton data-btnname="Videos" selected={page === 'Videos'} onClick={this.handleDropdownClick}>
-                      Videos
+                  <div data-btnname={pages[1]} onClick={this.handleDropdownClick}>
+                    <NavButton data-btnname={pages[1]} selected={page === pages[1]} onClick={this.handleDropdownClick}>
+                      {pages[1]}
                     </NavButton>
                   </div>
                 ) : false}
               {(windowWidth < 746)
                 ? (
-                  <div>
-                    <NavButton data-btnname="Clips" selected={page === 'Clips'} onClick={this.handleDropdownClick}>
-                      Clips
+                  <div data-btnname={pages[2]} onClick={this.handleDropdownClick}>
+                    <NavButton data-btnname={pages[2]} selected={page === pages[2]} onClick={this.handleDropdownClick}>
+                      {pages[2]}
                     </NavButton>
                   </div>
                 ) : false}
               {(windowWidth < 801)
                 ? (
-                  <div>
-                    <NavButton data-btnname="Followers" selected={page === 'Followers'} onClick={this.handleDropdownClick}>
-                      Followers
+                  <div data-btnname={pages[3]} onClick={this.handleDropdownClick}>
+                    <NavButton data-btnname={pages[3]} selected={page === pages[3]} onClick={this.handleDropdownClick}>
+                      {pages[3]}
                     </NavButton>
                   </div>
                 ) : false}
