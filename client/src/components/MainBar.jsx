@@ -58,7 +58,6 @@ class MainBar extends React.Component {
       avatarPicUrl: '',
       backgroundPicUrl: '',
       // customEmotesCount: 0,
-      // page: 'home',
       bubbleLive: 0,
       bubbleVerified: 0,
       page: 'Home',
