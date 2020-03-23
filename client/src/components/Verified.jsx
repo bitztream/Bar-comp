@@ -6,8 +6,9 @@ const Img = styled.img`
   height: auto;
 `;
 
-function Verified() {
-  return <Img src="https://bitztreambar.s3-us-west-1.amazonaws.com/verified.png" alt="User is verified" />;
+function Verified(props) {
+  const { enter, leave } = props;
+  return <Img data-status="verified" onMouseEnter={enter} onMouseLeave={leave} src="https://bitztreambar.s3-us-west-1.amazonaws.com/verified.png" alt="User is verified" />;
 }
 
 export default Verified;
