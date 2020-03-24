@@ -15,6 +15,7 @@ import Menu from './Menu';
 import DropMenu from './DropMenu';
 import NavButton from './NavButton';
 import SubscribeModal from './SubscribeModal';
+import axios from 'axios';
 
 const BarDiv = styled.div`
   display: flex;
@@ -71,7 +72,11 @@ class MainBar extends React.Component {
   }
 
   componentDidMount() {
-    this.setState(dataSample);
+    axios.get('/streamers/random')
+      .then((res) => this.setState(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
     this.handleResizeMain();
     window.addEventListener('resize', this.handleResizeMain);
   }

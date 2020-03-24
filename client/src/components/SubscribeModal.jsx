@@ -201,10 +201,10 @@ class SubscribeModal extends React.Component {
     const mappedSubsEm = emotes.map((item, index) => (
       <Twemoji className="emoSpan" svg text={`:${item}:`} key={item} data-number={index} />
     ));
-    const mappedSubswords = ['1-Month', '3-Month', '6-Month', '1-Year', '2-Year'].map((item, index) => <h6 key={item}>{item}</h6>);
+    const mappedSubswords = ['1-Month', '3-Month', '6-Month', '1-Year', '2-Year'].map((item, index) => <h6 key={index}>{item}</h6>);
     const mappedCustom = custom.map((item, index) => (
       <EmoWrapper>
-        <Twemoji svg className="custom" style={{ padding: '0 4px' }} text={`:${item}:`} key={item} data-number={index} />
+        <Twemoji svg className="custom" style={{ padding: '0 4px' }} text={`:${item}:`} key={index} data-number={index} />
       </EmoWrapper>
     ));
     const realUrl = `url("${backgroundUrl}")`;
@@ -222,7 +222,7 @@ class SubscribeModal extends React.Component {
         </Banner>
         <Block1>
           <BlockDiv>
-            <h5 bold style={{ fontWeight: 'bold' }}>Tier 1 Subscription</h5>
+            <h5 style={{ fontWeight: 'bold' }}>Tier 1 Subscription</h5>
             <h5>Renews monthly at $4.99</h5>
           </BlockDiv>
           <div>
