@@ -1,9 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import DivCol from './DivCol';
 import DivRow from './DivRow';
-import data from './fakeData';
 import StreamerInfo from './StreamerInfo';
 import Verified from './Verified';
 import Follow from './Follow';
@@ -15,7 +15,6 @@ import Menu from './Menu';
 import DropMenu from './DropMenu';
 import NavButton from './NavButton';
 import SubscribeModal from './SubscribeModal';
-import axios from 'axios';
 
 const BarDiv = styled.div`
   display: flex;
@@ -34,8 +33,6 @@ const Div = styled.div`
   padding-left: 10px;
   padding-right: ${(props) => (props.last ? '10px' : '0px')};
 `;
-
-const dataSample = data;
 
 class MainBar extends React.Component {
   constructor(props) {
