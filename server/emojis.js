@@ -1986,12 +1986,6 @@ module.exports.emos = {
     "fitzpatrick_scale": false,
     "category": "people"
   },
-  "billed_hat": {
-    "keywords": ["cap", "baseball"],
-    "char": "🧢",
-    "fitzpatrick_scale": false,
-    "category": "people"
-  },
   "rescue_worker_helmet": {
     "keywords": ["construction", "build"],
     "char": "⛑",
@@ -3177,12 +3171,6 @@ module.exports.emos = {
   "watermelon": {
     "keywords": ["fruit", "food", "picnic", "summer"],
     "char": "🍉",
-    "fitzpatrick_scale": false,
-    "category": "food_and_drink"
-  },
-  "grapes": {
-    "keywords": ["fruit", "food", "wine"],
-    "char": "🍇",
     "fitzpatrick_scale": false,
     "category": "food_and_drink"
   },

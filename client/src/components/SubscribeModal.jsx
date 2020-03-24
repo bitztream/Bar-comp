@@ -16,7 +16,7 @@ const Main = styled.div`
   width: 60vw;
   max-width: 700px;
   min-width: 460px;
-  height: 2500px;
+  height: 1200px;
   #dimdiv {
     z-index: 11;
     position: absolute;
@@ -56,7 +56,7 @@ const Banner = styled.div`
   align-items: center;
   z-index: 11;
   div {
-    margin-top: 24px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     img { 
@@ -138,7 +138,7 @@ const EmoteSet = styled.div`
 
 const CustomDiv = styled.div`
   width: 100%;
-  margin: 40px 18px 0;
+  margin: 10px 18px 0;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -151,7 +151,7 @@ const EmoWrapper = styled.div`
   justify-content: center;
   align-items: center;
   span {
-    font-size: 22x;
+    font-size: 24px;
   }
 `;
 
@@ -248,9 +248,12 @@ class SubscribeModal extends React.Component {
         </EmotSetMain>
         <EmotSetMain>
           <EmoteSet data-name="set">
-              {mappedSubswords}
+            {mappedSubswords}
           </EmoteSet>
         </EmotSetMain>
+        <Block2>
+          <h5>{count} Custom Emotes</h5>
+        </Block2>
         <EmotSetMain data-name="main">
           <CustomDiv>
             {mappedCustom}
