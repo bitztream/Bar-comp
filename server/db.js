@@ -48,5 +48,22 @@ const get = (name, cb) => {
     });
 };
 
+const getRandomInt = (floor, celing) => {
+  const min = Math.ceil(floor);
+  const max = Math.floor(celing);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const getRandom = (cb) => {
+  const ob = {
+    _id: 0, __v: 0, subscribers: 0, followersCount: 0,
+  };
+  Streamer.findOne({}, ob).limit(1).skip(getRandomInt(1, 100))
+    .then((data) => {
+      cb(data);
+    });
+};
+
 module.exports.get = get;
+module.exports.getRandom = getRandom;
 module.exports.save = save;

@@ -1,9 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import DivCol from './DivCol';
 import DivRow from './DivRow';
-import data from './fakeData';
 import StreamerInfo from './StreamerInfo';
 import Verified from './Verified';
 import Follow from './Follow';
@@ -34,12 +34,9 @@ const Div = styled.div`
   padding-right: ${(props) => (props.last ? '10px' : '0px')};
 `;
 
-const dataSample = data;
-
 class MainBar extends React.Component {
   constructor(props) {
     super(props);
-    this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.subscribeClick = this.subscribeClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
     this.handleBubbleIn = this.handleBubbleIn.bind(this);
@@ -47,6 +44,7 @@ class MainBar extends React.Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleResizeMain = this.handleResizeMain.bind(this);
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.basePages = ['Home', 'Videos', 'Clips', 'Followers'];
     this.state = {
       isLive: true,
@@ -71,7 +69,11 @@ class MainBar extends React.Component {
   }
 
   componentDidMount() {
-    this.setState(dataSample);
+    axios.get('/streamers/random')
+      .then((res) => this.setState(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
     this.handleResizeMain();
     window.addEventListener('resize', this.handleResizeMain);
   }
