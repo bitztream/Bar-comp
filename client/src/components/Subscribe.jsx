@@ -57,9 +57,9 @@ class Subscribe extends React.Component {
   }
 
   render() {
-    const { is } = this.props;
+    const { is, click } = this.props;
     return (
-      <Container sus={is} onClick={this.handleClick}>
+      <Container sus={is} onClick={click}>
         <Star sus={is} />
         <Word>Subscribe</Word>
         <Down sus={is} />

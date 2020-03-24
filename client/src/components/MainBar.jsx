@@ -14,6 +14,7 @@ import Live from './Live';
 import Menu from './Menu';
 import DropMenu from './DropMenu';
 import NavButton from './NavButton';
+import SubscribeModal from './SubscribeModal';
 
 const BarDiv = styled.div`
   display: flex;
@@ -52,12 +53,12 @@ class MainBar extends React.Component {
       streamerIsClicked: false,
       isVerified: true,
       isSubscribed: false,
-      // subscriptionEmotes: [],
-      // customEmotes: [],
+      subscriptionEmotes: [],
+      customEmotes: [],
       name: '',
       avatarPicUrl: '',
       backgroundPicUrl: '',
-      // customEmotesCount: 0,
+      customEmotesCount: 0,
       bubbleLive: 0,
       bubbleVerified: 0,
       page: 'Home',
@@ -108,7 +109,8 @@ class MainBar extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   subscribeClick() {
-    // this.setState({ isSubscribed: true });
+    const { isSubscribed } = this.state;
+    this.setState({ isSubscribed: !isSubscribed });
   }
 
   handleResizeMain() {
@@ -148,7 +150,8 @@ class MainBar extends React.Component {
   render() {
     const {
       name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
-      page, pages, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth,
+      page, pages, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth, subscriptionEmotes,
+      customEmotes, customEmotesCount,
     } = this.state;
     const realUrl = `url(${backgroundPicUrl})`;
 
@@ -183,11 +186,11 @@ class MainBar extends React.Component {
 
             <Div nav last>
               <Div>
-                <Follow click={this.subscribeClick} />
+                <Follow />
               </Div>
 
               <Div>
-                {isSubscribed ? <Subscribe is /> : <Subscribe />}
+                <Subscribe click={this.subscribeClick} />
               </Div>
 
             </Div>
@@ -222,6 +225,18 @@ class MainBar extends React.Component {
                   </div>
                 ) : false}
             </DropMenu>
+          ) : false}
+        {isSubscribed
+          ? (
+            <SubscribeModal
+              click={this.subscribeClick}
+              emotes={subscriptionEmotes}
+              custom={customEmotes}
+              count={customEmotesCount}
+              backgroundUrl={backgroundPicUrl}
+              avatarPic={avatarPicUrl}
+              name={name}
+            />
           ) : false}
       </DivCol>
     );

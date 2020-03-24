@@ -64,7 +64,7 @@ class Follow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      growHeart: false, subscribed: false, breakHeart: false, muteEffect: false, notificationsOn: true,
+      growHeart: false, following: false, breakHeart: false, muteEffect: false, notificationsOn: true,
     };
     this.mouseEnter = this.mouseEnter.bind(this);
     this.mouseLeave = this.mouseLeave.bind(this);
@@ -99,8 +99,8 @@ class Follow extends React.Component {
   }
 
   handleClick(e) {
-    const { subscribed } = this.state;
-    this.setState({ subscribed: !subscribed, breakHeart: false });
+    const { following } = this.state;
+    this.setState({ following: !following, breakHeart: false });
   }
 
   notificationClick() {
@@ -109,9 +109,8 @@ class Follow extends React.Component {
   }
 
   render() {
-    // const { click } = this.props;
     const {
-      growHeart, breakHeart, muteEffect, subscribed, notificationsOn,
+      growHeart, breakHeart, muteEffect, following, notificationsOn,
     } = this.state;
     const bigUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/whiteHeart.png")';
     const smallUrl = 'url("https://bitztreambar.s3-us-west-1.amazonaws.com/thickHeart.png")';
@@ -123,7 +122,7 @@ class Follow extends React.Component {
 
     return (
       <Wrapper>
-        {!subscribed
+        {!following
           ? (
             <Container
               data-box="white"
@@ -152,7 +151,7 @@ class Follow extends React.Component {
             </Container>
           )}
 
-        {subscribed
+        {following
           ? (
             <ContainerS
               data-box="notification"
