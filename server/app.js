@@ -3,7 +3,7 @@ const path = require('path');
 const mongo = require('./db.js');
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 app.use(express.static(path.join(__dirname, '../client/public')));
 app.use(express.json());
