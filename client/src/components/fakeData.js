@@ -24,7 +24,6 @@ const data = {
     'blue_book',
     'yin_yang',
     'top',
-    'billed_hat',
     'u6708',
     'liechtenstein',
     'gem',
@@ -53,7 +52,7 @@ const data = {
  name: 'YumboJohnXX3000',
  avatarPicUrl: 'https://loremflickr.com/80/80',
  backgroundPicUrl: 'https://loremflickr.com/600/400',
- customEmotesCount: 44 };
+ customEmotesCount: 43 };
 
  export default data;
  
