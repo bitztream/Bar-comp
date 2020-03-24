@@ -37,7 +37,6 @@ const Div = styled.div`
 class MainBar extends React.Component {
   constructor(props) {
     super(props);
-    this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.subscribeClick = this.subscribeClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
     this.handleBubbleIn = this.handleBubbleIn.bind(this);
@@ -45,6 +44,7 @@ class MainBar extends React.Component {
     this.handleMenuClick = this.handleMenuClick.bind(this);
     this.handleResizeMain = this.handleResizeMain.bind(this);
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
+    this.handleStreamerClick = this.handleStreamerClick.bind(this);
     this.basePages = ['Home', 'Videos', 'Clips', 'Followers'];
     this.state = {
       isLive: true,
