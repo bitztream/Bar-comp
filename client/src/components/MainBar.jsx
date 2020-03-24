@@ -152,8 +152,8 @@ class MainBar extends React.Component {
   render() {
     const {
       name, backgroundPicUrl, avatarPicUrl, isVerified, isLive, streamerIsClicked, isSubscribed,
-      page, pages, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth, subscriptionEmotes,
-      customEmotes, customEmotesCount,
+      page, pages, bubbleVerified, bubbleLive, menuClicked, menuPosition, windowWidth,
+      subscriptionEmotes, customEmotes, customEmotesCount,
     } = this.state;
     const realUrl = `url(${backgroundPicUrl})`;
 

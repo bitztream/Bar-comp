@@ -8,6 +8,6 @@ In order to run, clone down the repo and run the following comands:
 2. npm run build
 3. node server/app.js
 
-Then go to localhost:3000 on your browser.
+Then go to localhost:8000 on your browser.
 
 
