@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Subscribe from './Subscribe';
-import DivCol from './DivCol';
-import { Twemoji, Emoji } from 'react-emoji-render';
+import  Twemoji from 'react-emoji-render';
 
 const Main = styled.div`
   display: flex;
@@ -146,12 +145,12 @@ const CustomDiv = styled.div`
 const EmoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   justify-content: center;
   align-items: center;
   span {
-    font-size: 24px;
+    font-size: 28px;
   }
 `;
 
@@ -193,18 +192,37 @@ class SubscribeModal extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    const { count } = this.props;
+
+    for (let i = 0; i < count; i += 1) {
+      const node = document.getElementById('custom' + i);
+      if (node.childNodes.length > 1) {
+        const text = node.lastChild;
+        node.removeChild(text);
+      }
+    }
+    for (let i = 0; i < 5; i += 1) {
+      const node = document.getElementById('set' + i);
+      if (node.childNodes.length > 1) {
+        const text = node.lastChild;
+        node.removeChild(text);
+      }
+    }
+  }
+
   render() {
     const {
       // eslint-disable-next-line react/prop-types
       backgroundUrl, avatarPic, name, click, emotes, custom, count,
     } = this.props;
     const mappedSubsEm = emotes.map((item, index) => (
-      <Twemoji className="emoSpan" svg text={`:${item}:`} key={item} data-number={index} />
+      <Twemoji id={'set' + index }className="emoSpan" text={`:${item}:`} key={item} data-number={index} />
     ));
     const mappedSubswords = ['1-Month', '3-Month', '6-Month', '1-Year', '2-Year'].map((item, index) => <h6 key={index}>{item}</h6>);
     const mappedCustom = custom.map((item, index) => (
       <EmoWrapper>
-        <Twemoji svg className="custom" style={{ padding: '0 4px' }} text={`:${item}:`} key={index} data-number={index} />
+        <Twemoji id={ 'custom' + index} className="custom" style={{ padding: '0 4px' }} text={`:${item}:`} key={index} data-number={index} />
       </EmoWrapper>
     ));
     const realUrl = `url("${backgroundUrl}")`;
@@ -254,7 +272,7 @@ class SubscribeModal extends React.Component {
         <Block2>
           <h5>{count} Custom Emotes</h5>
         </Block2>
-        <EmotSetMain data-name="main">
+        <EmotSetMain  data-name="main">
           <CustomDiv>
             {mappedCustom}
           </CustomDiv>
