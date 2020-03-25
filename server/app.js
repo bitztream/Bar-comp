@@ -35,7 +35,6 @@ app.put('/streamers/:name', (req, res) => {
   console.log(`Updating follower count on ${streamerName} : `, value);
 
   mongo.update(streamerName, value, () => {
-    console.log('Data fetched successfully from DB: ');
     res.send('Updated!');
   });
 });
