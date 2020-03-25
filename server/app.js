@@ -15,7 +15,7 @@ app.listen(port, () => {
 app.get('/streamers/random', (req, res) => {
   console.log('Fetching data on Random Streamer ');
   mongo.getRandom((data) => {
-    console.log('Data fetched from DB: ', data);
+    console.log('Data fetched successfully from DB: ');
     res.send(data);
   });
 });
@@ -26,5 +26,16 @@ app.get('/streamers/:name', (req, res) => {
   mongo.get(streamerName, (data) => {
     console.log('Data fetched from DB: ', data);
     res.send(data);
+  });
+});
+
+app.put('/streamers/:name', (req, res) => {
+  const streamerName = req.params.name;
+  const value = req.body.amount;
+  console.log(`Updating follower count on ${streamerName} : `, value);
+
+  mongo.update(streamerName, value, () => {
+    console.log('Data fetched successfully from DB: ');
+    res.send('Updated!');
   });
 });

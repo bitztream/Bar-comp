@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Wrapper = styled.div`
   display: flex;
@@ -99,7 +100,26 @@ class Follow extends React.Component {
   }
 
   handleClick(e) {
+    const { name } = this.props;
     const { following } = this.state;
+    if (!following) {
+      axios.put(`/streamers/${name}`, { amount: 1 })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    if (following) {
+      axios.put(`/streamers/${name}`, { amount: -1 })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
     this.setState({ following: !following, breakHeart: false });
   }
 

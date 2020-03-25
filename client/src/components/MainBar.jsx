@@ -188,7 +188,7 @@ class MainBar extends React.Component {
 
             <Div nav last>
               <Div>
-                <Follow />
+                <Follow name={name} />
               </Div>
 
               <Div>

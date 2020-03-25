@@ -48,6 +48,16 @@ const get = (name, cb) => {
     });
 };
 
+const update = (name, value, cb) => {
+  const object = { $inc: { followersCount: value } };
+  Streamer.update({ name }, object)
+    .then(data => {
+      console.log(Object.keys(data));
+      cb();
+    });
+
+};
+
 const getRandomInt = (floor, celing) => {
   const min = Math.ceil(floor);
   const max = Math.floor(celing);
@@ -67,3 +77,4 @@ const getRandom = (cb) => {
 module.exports.get = get;
 module.exports.getRandom = getRandom;
 module.exports.save = save;
+module.exports.update = update;
