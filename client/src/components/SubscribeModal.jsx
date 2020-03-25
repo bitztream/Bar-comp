@@ -145,12 +145,12 @@ const CustomDiv = styled.div`
 const EmoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   justify-content: center;
   align-items: center;
   span {
-    font-size: 28px;
+    font-size: 24px;
   }
 `;
 
