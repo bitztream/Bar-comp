@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/bar-comp', {
+mongoose.connect('mongodb://mongo:27017/bar-comp', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
