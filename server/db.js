@@ -55,7 +55,6 @@ const update = (name, value, cb) => {
       console.log(Object.keys(data));
       cb();
     });
-
 };
 
 const getRandomInt = (floor, celing) => {

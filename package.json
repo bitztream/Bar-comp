@@ -4,7 +4,8 @@
   "description": "Something",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/app.js",
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js",
     "seed": "node server/seeder.js",
     "watchbuild": "webpack --watch",
     "build": "webpack",
