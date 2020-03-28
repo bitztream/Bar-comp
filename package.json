@@ -2,7 +2,6 @@
   "name": "fec",
   "version": "1.0.0",
   "description": "Something",
-  "main": "index.js",
   "scripts": {
     "start": "node server/app.js",
     "dev": "nodemon server/app.js",
@@ -29,7 +28,6 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "mongoose": "^5.9.4",
-    "nodemon": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-emoji-render": "^1.2.2",
@@ -49,6 +47,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
     "webpack": "^4.42.0"
   }
 }

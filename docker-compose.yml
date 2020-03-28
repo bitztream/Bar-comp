@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mongo:
+    container_name: mongo_streamers
+    image: mongo
+    ports: 
+      - "27017:27017"
+  service:
+    container_name: bar_server  
+    build: .
+    depends_on:
+      - "mongo"
+    ports: 
+      - "8080:8080"
+    command: bash -c "
+      npm run seed
+      && npm start"
+

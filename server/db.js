@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongo:27017/bar-comp', {
+// mongoose.connect('mongodb://localhost/bar-comp', {
+  mongoose.connect('mongodb://mongo:27017/bar-comp', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -77,3 +78,4 @@ module.exports.get = get;
 module.exports.getRandom = getRandom;
 module.exports.save = save;
 module.exports.update = update;
+module.exports.mongoose = mongoose;
