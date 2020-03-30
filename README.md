@@ -2,13 +2,8 @@
 
 Navigation bar to interact with the stramer as well as exploring his content. 
 
-In order to run, clone down the repo and run the following comands:
+In order to run, clone down the repo and then spin-up the two containers (Mongo and node.js server) by running the docker compose up. 
 
-1. npm install
-2. npm run seed
-3. npm run build
-4. node server/app.js
-
-Then go to localhost:8001 on your browser.
+Then go to localhost:8080 on your browser.
 
 
